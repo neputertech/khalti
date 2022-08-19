@@ -1,0 +1,32 @@
+{
+    "name": "735l4/khalti",
+    "description": "Php wrapper for khalti integration",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Khalti\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "735l4",
+            "email": "pratibimbakhadka@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4.0|^8.0",
+        "nunomaduro/collision": "^6.2.1"
+    },
+    "require-dev": {
+        "illuminate/console": "^9.23",
+        "illuminate/support": "^9.23"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Khalti\\Laravel\\KhaltiServiceProvider"
+            ]
+        }
+    }
+
+}
