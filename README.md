@@ -41,7 +41,7 @@ The package will automatically register itself.
 You can publish the config with:
 
 ```bash
-php artisan vendor:publish --tags=khalti-config
+php artisan vendor:publish --tag=khalti-config
 ```
 
 
