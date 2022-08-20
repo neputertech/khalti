@@ -1,6 +1,6 @@
 # Laravel Khalti 
 
-This package can help you inigrate khalti new ePayment Gateway (NEW) to your php application.
+This package can help you inegrate khalti new ePayment Gateway (NEW) to your php application.
 
 Here is an example of how you can initiate khalti transaction:
 
