@@ -33,7 +33,7 @@ class PaymentController extends Controller {
 You can install the package via composer:
 
 ```bash
-composer require 735l4/khalti
+composer require neputertech/khalti
 ```
 
 The package will automatically register itself.
