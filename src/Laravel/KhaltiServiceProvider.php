@@ -17,6 +17,10 @@ final class KhaltiServiceProvider extends ServiceProvider {
 
         $this->mergeConfigFrom(__DIR__ . '/../config/khalti.php', 'khalti');
 
+        $this->app->bind('khalti', function() {
+            return new Khalti();
+        });
+
         $this->app->singleton(Khalti::class, function () {
             return new Khalti();
         });
