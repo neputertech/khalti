@@ -58,6 +58,16 @@ return [
 ];
 ```
 
+## Update .env with your khalti credentials
+This credentals are provided with merchant dashboard. 
+
+set debug flag to false in config to use live khalti 
+
+```bash
+KHALTI_PUBLIC_KEY=
+KHALTI_SECRET_KEY=
+```
+
 
 
 ## Usage
