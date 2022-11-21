@@ -1,8 +1,8 @@
 # Laravel Khalti 
 
-This package can help you inegrate khalti new ePayment Gateway (NEW) to your php application.
+This package can help you integrate Khalti new ePayment Gateway (NEW) to your php application.
 
-Here is an example of how you can initiate khalti transaction:
+Here is an example of how you can initiate Khalti transaction:
 
 ```php
 ...
@@ -53,13 +53,23 @@ return [
     'debug' => true, // set false to run on live khalti url
     'auto_redirect' => true, // set false if you don't want khalti to auto redirect
     'website_url' => 'https://example.com', // your website url
-    'live_public_key' => '', // public key from khalti
-    'live_secret_key' => '' // secret key from khalti
+    'live_public_key' => env('KHALTI_PUBLIC_KEY', ''), // public key from khalti
+    'live_secret_key' => env('KHALTI_SECRET_KEY', '') // secret key from khalti
 ];
+```
+
+## Update .env with your khalti credentials
+This credentals are provided with merchant dashboard. 
+
+set debug flag to false in config to use live khalti 
+
+```bash
+KHALTI_PUBLIC_KEY=
+KHALTI_SECRET_KEY=
 ```
 
 
 
 ## Usage
 
-The basic concept of this package is that you can integrate khalti ePayment Gateway (NEW) to your laravel applications and initiate/vetify transactions 
+The basic concept of this package is that you can integrate Khalti ePayment Gateway (NEW) to your laravel applications and initiate/verify transactions 
