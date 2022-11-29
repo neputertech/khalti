@@ -1,9 +1,9 @@
 <?php
 
-namespace Khalti\Laravel;
+namespace Neputer\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use Khalti\Khalti;
+use Neputer\Khalti;
 
 final class KhaltiServiceProvider extends ServiceProvider {
 

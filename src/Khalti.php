@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Khalti;
+namespace Neputer;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;

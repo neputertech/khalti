@@ -4,7 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Khalti\\": "src/"
+            "Neputer\\": "src/"
         }
     },
     "authors": [
@@ -23,7 +23,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Khalti\\Laravel\\KhaltiServiceProvider"
+                "Neputer\\Laravel\\KhaltiServiceProvider"
             ]
         }
     }

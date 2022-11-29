@@ -1,5 +1,5 @@
 <?php
-namespace Khalti\Facades;
+namespace Neputer\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
