@@ -1,9 +1,9 @@
 <?php
 
-namespace Khalti\Laravel;
+namespace Neputer\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use Khalti\Khalti;
+use Neputer\Khalti;
 
 final class KhaltiServiceProvider extends ServiceProvider {
 
@@ -16,6 +16,10 @@ final class KhaltiServiceProvider extends ServiceProvider {
     public function register() {
 
         $this->mergeConfigFrom(__DIR__ . '/../config/khalti.php', 'khalti');
+
+        $this->app->bind('khalti', function() {
+            return new Khalti();
+        });
 
         $this->app->singleton(Khalti::class, function () {
             return new Khalti();
