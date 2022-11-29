@@ -6,7 +6,7 @@ Here is an example of how you can initiate Khalti transaction:
 
 ```php
 ...
-use Khalti\Facades\Khalti;
+use Neputer\Facades\Khalti;
 
 class PaymentController extends Controller {
     ...
