@@ -16,9 +16,17 @@ class Khalti
 
     public function __construct()
     {
-        $this->secretKey =  Config::get('khalti.live_secret_key');
         $this->debug =  Config::get('khalti.debug');
         $this->autoRedirect = Config::get('khalti.auto_redirect');
+
+        if(!$this->debug) {
+            $this->publicKey =  Config::get('khalti.live_public_key');
+            $this->secretKey =  Config::get('khalti.live_secret_key');
+        } else {
+            $this->publicKey =  Config::get('khalti.test_public_key');
+            $this->secretKey = Config::get('khalti.test_secret_key');
+        }
+
 
         $this->baseUrl = $this->debug
             ? 'https://a.khalti.com/api/v2/epayment/initiate/'
