@@ -66,7 +66,7 @@ This credentals are provided with merchant dashboard.
 set debug flag to false in config to use live khalti 
 
 ```bash
-KHALTI_DEBUG=true //Set this flag to false to use khatli in production
+KHALTI_DEBUG=true # Set this flag to false to use khatli in production
 KHALTI_LIVE_PUBLIC_KEY=
 KHALTI_LIVE_SECRET_KEY=
 KHALTI_TEST_PUBLIC_KEY=
