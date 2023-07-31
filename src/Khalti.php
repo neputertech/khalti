@@ -51,7 +51,7 @@ class Khalti
         }
 
         if ($product_details) {
-            $request_data['amount_breakdown'] = $amount_breakdown;
+            $request_data['product_details'] = $product_details;
         }
 
         $base_url = $this->baseUrl;
