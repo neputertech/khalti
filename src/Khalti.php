@@ -18,20 +18,15 @@ class Khalti
     {
         $this->debug =  Config::get('khalti.debug');
         $this->autoRedirect = Config::get('khalti.auto_redirect');
-
-        if(!$this->debug) {
-            $this->publicKey =  Config::get('khalti.live_public_key');
-            $this->secretKey =  Config::get('khalti.live_secret_key');
-        } else {
-            $this->publicKey =  Config::get('khalti.test_public_key');
-            $this->secretKey = Config::get('khalti.test_secret_key');
-        }
+        $this->publicKey =  Config::get('khalti.public_key');
+        $this->secretKey =  Config::get('khalti.secret_key');
 
 
         $this->baseUrl = $this->debug
             ? 'https://a.khalti.com/api/v2/epayment/initiate/'
             : 'https://khalti.com/api/v2/epayment/initiate/';
     }
+    
 
     public function initiate(string $return_url, string $purchase_order_id, string $purchase_order_name, int $amount, ?array $customer_info = null, ?array $amount_breakdown = null,  ?array $product_details = null)
     {
@@ -56,7 +51,7 @@ class Khalti
         }
 
         if ($product_details) {
-            $request_data['amount_breakdown'] = $amount_breakdown;
+            $request_data['product_details'] = $product_details;
         }
 
         $base_url = $this->baseUrl;
@@ -75,7 +70,7 @@ class Khalti
                 CURLOPT_POSTFIELDS => json_encode($request_data),
 
                 CURLOPT_HTTPHEADER => array(
-                    "Authorization: Key ${private_key}",
+                    "Authorization: Key $private_key",
                     'Content-Type: application/json'
                 ),
             ));
@@ -116,7 +111,7 @@ class Khalti
                 ]),
 
                 CURLOPT_HTTPHEADER => array(
-                    "Authorization: Key ${private_key}",
+                    "Authorization: Key $private_key",
                     'Content-Type: application/json'
                 ),
             ));
