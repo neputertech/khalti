@@ -1,18 +1,43 @@
 <?php
 
 
-namespace Khalti;
+namespace Neputer;
+
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 
-class Khalti {
+class Khalti
+{
+    private $publicKey;
+    private $secretKey;
+    private $debug;
+    private $autoRedirect;
+    private $baseUrl;
 
-    public static function initiate(string $return_url, string $purchase_order_id, string $purchase_order_name, int $amount, ?array $customer_info = null, ?array $amount_breakdown = null,  ?array $product_details = null)
+    public function __construct()
     {
+        $this->debug =  Config::get('khalti.debug');
+        $this->autoRedirect = Config::get('khalti.auto_redirect');
 
-        $private_key = Config::get('khalti.live_secret_key');
-        $debug = Config::get('khalti.debug');
-        $auto_redirect = Config::get('khalti.auto_redirect');
+        if(!$this->debug) {
+            $this->publicKey =  Config::get('khalti.live_public_key');
+            $this->secretKey =  Config::get('khalti.live_secret_key');
+        } else {
+            $this->publicKey =  Config::get('khalti.test_public_key');
+            $this->secretKey = Config::get('khalti.test_secret_key');
+        }
+
+
+        $this->baseUrl = $this->debug
+            ? 'https://a.khalti.com/api/v2/epayment/initiate/'
+            : 'https://khalti.com/api/v2/epayment/initiate/';
+    }
+
+    public function initiate(string $return_url, string $purchase_order_id, string $purchase_order_name, int $amount, ?array $customer_info = null, ?array $amount_breakdown = null,  ?array $product_details = null)
+    {
+        $private_key = $this->secretKey;
+
+        $auto_redirect = $this->autoRedirect;
 
         $request_data = [
             'return_url' => $return_url,
@@ -22,19 +47,19 @@ class Khalti {
             'purchase_order_name' => $purchase_order_name,
         ];
 
-        if($customer_info) {
+        if ($customer_info) {
             $request_data['customer_info'] = $customer_info;
         }
 
-        if($amount_breakdown) {
+        if ($amount_breakdown) {
             $request_data['amount_breakdown'] = $amount_breakdown;
         }
 
-        if($product_details) { 
+        if ($product_details) {
             $request_data['amount_breakdown'] = $amount_breakdown;
         }
 
-        $base_url = $debug ? 'https://a.khalti.com/api/v2/epayment/initiate/' : 'https://khalti.com/api/v2/epayment/initiate/';
+        $base_url = $this->baseUrl;
         try {
             $curl = curl_init();
 
@@ -59,22 +84,21 @@ class Khalti {
 
             $response = json_decode($response); // response in php object
 
-            if($auto_redirect && isset($response->payment_url)) {
+            if ($auto_redirect && isset($response->payment_url)) {
                 return Redirect::to($response->payment_url);
             }
 
-            return $response; 
+            return $response;
         } catch (\Exception $e) {
             throw $e;
         }
     }
 
-    public static function lookup(string $pidx)
+    public function lookup(string $pidx)
     {
-        $private_key = Config::get('khalti.live_secret_key');
-        $debug = Config::get('khalti.debug');
+        $private_key = $this->secretKey;
+        $base_url = $this->baseUrl;
 
-        $base_url = $debug ? 'https://a.khalti.com/api/v2/epayment/lookup/' : 'https://khalti.com/api/v2/epayment/lookup/';
         try {
             $curl = curl_init();
 
@@ -100,7 +124,7 @@ class Khalti {
             curl_close($curl);
             $response = json_decode($response, true); //conv in array
 
-            return $response; 
+            return $response;
         } catch (\Exception $e) {
             throw $e;
         }
