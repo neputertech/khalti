@@ -23,8 +23,8 @@ class Khalti
 
 
         $this->baseUrl = $this->debug
-            ? 'https://a.khalti.com/api/v2/epayment/initiate/'
-            : 'https://khalti.com/api/v2/epayment/initiate/';
+            ? 'https://a.khalti.com/api/v2/epayment'
+            : 'https://khalti.com/api/v2/epayment';
     }
     
 
@@ -54,7 +54,7 @@ class Khalti
             $request_data['product_details'] = $product_details;
         }
 
-        $base_url = $this->baseUrl;
+        $base_url = $this->baseUrl . '/initiate';
         try {
             $curl = curl_init();
 
@@ -92,7 +92,7 @@ class Khalti
     public function lookup(string $pidx)
     {
         $private_key = $this->secretKey;
-        $base_url = $this->baseUrl;
+        $base_url = $this->baseUrl . '/lookup';
 
         try {
             $curl = curl_init();
