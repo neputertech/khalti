@@ -23,8 +23,8 @@ class Khalti
 
 
         $this->baseUrl = $this->debug
-            ? 'https://a.khalti.com/api/v2'
-            : 'https://khalti.com/api/v2';
+            ? 'https://a.khalti.com/api/v2/epayment'
+            : 'https://khalti.com/api/v2/epayment';
     }
     
 
