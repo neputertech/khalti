@@ -7,6 +7,7 @@ Here is an example of how you can initiate Khalti transaction:
 ```php
 ...
 use Neputer\Facades\Khalti;
+use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller {
     ...
@@ -16,7 +17,11 @@ class PaymentController extends Controller {
         $purchase_order_name = "your_order_name"; // example Transaction: 1234,
         $amount = 1000; // Your total amount in paisa Rs 1 = 100 paisa
 
-        return Khalti::initiate($return_url, $purchase_order_id, $purchase_order_name,  $amount);
+        $response =  Khalti::initiate($return_url, $purchase_order_id, $purchase_order_name,  $amount);
+
+        // Custom handle of khalti response
+
+        return Redirect::to($response->payment_url);
     }
 
     public function verify(Request $request) {
