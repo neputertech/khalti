@@ -84,7 +84,7 @@ class Khalti
 
             }
 
-            return $response;
+            return (object) $response;
         } catch (\Exception $e) {
             throw $e;
         }
