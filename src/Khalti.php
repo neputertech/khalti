@@ -4,7 +4,7 @@
 namespace Neputer;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 
 class Khalti
 {
@@ -79,8 +79,9 @@ class Khalti
 
             $response = json_decode($response); // response in php object
 
-            if ($auto_redirect && isset($response->payment_url)) {
-                return Redirect::to($response->payment_url);
+            if(isset($response->error_key)) {
+                throw ValidationException::withMessages((array) $response);
+
             }
 
             return $response;

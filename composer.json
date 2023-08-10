@@ -18,7 +18,8 @@
     },
     "require-dev": {
         "illuminate/console": "^7|^8|^9",
-        "illuminate/support": "^7|^8|^9"
+        "illuminate/support": "^7|^8|^9",
+        "illuminate/validation": "^9.52"
     },
     "extra": {
         "laravel": {
