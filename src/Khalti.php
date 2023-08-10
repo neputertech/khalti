@@ -77,14 +77,14 @@ class Khalti
             $response = curl_exec($curl);
             curl_close($curl);
 
-            $response = json_decode($response); // response in php object
+            $response = (object) json_decode($response); // response in php object
 
             if(isset($response->error_key)) {
                 throw ValidationException::withMessages((array) $response);
 
             }
 
-            return (object) $response;
+            return $response;
         } catch (\Exception $e) {
             throw $e;
         }
