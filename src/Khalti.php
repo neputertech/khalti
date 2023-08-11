@@ -4,6 +4,7 @@
 namespace Neputer;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 
 class Khalti
@@ -28,7 +29,15 @@ class Khalti
     }
     
 
-    public function initiate(string $return_url, string $purchase_order_id, string $purchase_order_name, int $amount, ?array $customer_info = null, ?array $amount_breakdown = null,  ?array $product_details = null)
+    public function initiate(
+        string $return_url, 
+        string $purchase_order_id, 
+        string $purchase_order_name, 
+        int $amount,
+        ?array $customer_info = [], 
+        ?array $amount_breakdown = [],  
+        ?array $product_details = []
+    )
     {
         $private_key = $this->secretKey;
 
@@ -81,7 +90,10 @@ class Khalti
 
             if(isset($response->error_key)) {
                 throw ValidationException::withMessages((array) $response);
+            }
 
+            if(isset($response->status_code) && $response->status_code === 401) {
+                throw ValidationException::withMessages(['error' => $response->detail])->status(401);
             }
 
             return $response;
