@@ -27,15 +27,32 @@ class Khalti
             ? 'https://a.khalti.com/api/v2/epayment'
             : 'https://khalti.com/api/v2/epayment';
     }
-    
+
+    public function setDebug(bool $status)
+    {
+        $this->debug = $status;
+        return $this;
+    }
+
+    public function setPublicKey(string $publicKey)
+    {
+        $this->publicKey = $publicKey;
+        return $this;
+    }
+
+    public function setPrivateKey(string $privateKey)
+    {
+        $this->privateKey = $privateKey;
+        return $this;
+    }
 
     public function initiate(
-        string $return_url, 
-        string $purchase_order_id, 
-        string $purchase_order_name, 
+        string $return_url,
+        string $purchase_order_id,
+        string $purchase_order_name,
         int $amount,
-        ?array $customer_info = [], 
-        ?array $amount_breakdown = [],  
+        ?array $customer_info = [],
+        ?array $amount_breakdown = [],
         ?array $product_details = []
     )
     {
