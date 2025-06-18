@@ -40,9 +40,9 @@ class Khalti
         return $this;
     }
 
-    public function setPrivateKey(string $privateKey)
+    public function setSecretKey(string secretKey)
     {
-        $this->privateKey = $privateKey;
+        $this->secretKey = $secretKey;
         return $this;
     }
 
