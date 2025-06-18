@@ -40,7 +40,7 @@ class Khalti
         return $this;
     }
 
-    public function setSecretKey(string secretKey)
+    public function setSecretKey(string $secretKey)
     {
         $this->secretKey = $secretKey;
         return $this;
